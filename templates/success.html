@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Application Submitted - Kindred NGO{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6 text-center">
+            <div class="card-glassmorphism p-5">
+                <!-- Checkmark Animation -->
+                <div class="success-checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                
+                <h2 class="fw-bold mb-3">Thank You!</h2>
+                <h5 class="text-accent-custom mb-4 fw-semibold">Application Successfully Submitted</h5>
+                
+                <p class="text-muted mb-5">
+                    We've received your application. Your willingness to serve is the first step toward making a lasting impact. Our volunteer coordinators will review your profile and reach out via email within the next 2-3 business days.
+                </p>
+                
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="{{ url_for('register') }}" class="btn btn-premium px-4">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Home
+                    </a>
+                    <a href="#" class="btn btn-secondary-custom px-4">
+                        <i class="bi bi-book me-2"></i>Explore NGO Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

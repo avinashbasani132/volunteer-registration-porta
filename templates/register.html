@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Volunteer Registration - Kindred NGO{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center justify-content-between g-5">
+        <!-- Left Column: Vision & Trust-Building NGO Info -->
+        <div class="col-lg-5 text-center text-lg-start">
+            <span class="badge bg-success bg-opacity-25 text-accent-custom mb-3 px-3 py-2 rounded-pill fw-semibold">Volunteer Community Portal</span>
+            <h1 class="hero-title mb-4">Be the Change <br>You Wish to See</h1>
+            <p class="hero-subtitle mb-5">At Kindred NGO, we believe that unified action transforms communities. By sharing your unique skills, you directly empower children, support local development, and build sustainable futures.</p>
+            
+            <!-- NGO Impact Stats / Features -->
+            <div class="row g-4 text-start">
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-start">
+                        <div class="info-icon-wrapper me-3">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">5,000+</h5>
+                            <p class="text-muted small mb-0">Active Volunteers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-start">
+                        <div class="info-icon-wrapper me-3">
+                            <i class="bi bi-globe2"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">20+</h5>
+                            <p class="text-muted small mb-0">Global Initiatives</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-start">
+                        <div class="info-icon-wrapper me-3">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Education</h5>
+                            <p class="text-muted small mb-0">Community Programs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-start">
+                        <div class="info-icon-wrapper me-3">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Recognition</h5>
+                            <p class="text-muted small mb-0">Certificate of Impact</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Registration Card -->
+        <div class="col-lg-6">
+            <div class="card-glassmorphism p-4 p-md-5">
+                <h3 class="fw-bold text-center mb-2">Join Our Mission</h3>
+                <p class="text-muted text-center mb-4">Complete the form below to begin your volunteer journey.</p>
+                
+                <form id="registrationForm" action="{{ url_for('register') }}" method="POST" class="needs-validation" novalidate>
+                    <!-- CSRF Token protection in forms. Flask-Login or standard session forms can use hidden fields. We will check it. -->
+                    
+                    <!-- Full Name -->
+                    <div class="mb-4">
+                        <label for="name" class="form-label-custom">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 border-glass text-muted"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control form-control-custom border-start-0" id="name" name="name" placeholder="John Doe" required autocomplete="name">
+                        </div>
+                        <div class="validation-feedback text-danger-feedback d-none" id="nameFeedback">
+                            Please enter your full name (minimum 2 characters).
+                        </div>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="mb-4">
+                        <label for="email" class="form-label-custom">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 border-glass text-muted"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control form-control-custom border-start-0" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
+                        </div>
+                        <div class="validation-feedback text-danger-feedback d-none" id="emailFeedback">
+                            Please enter a valid email address (e.g. john@example.com).
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-4">
+                        <label for="phone" class="form-label-custom">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 border-glass text-muted"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" class="form-control form-control-custom border-start-0" id="phone" name="phone" placeholder="9876543210" required autocomplete="tel">
+                        </div>
+                        <div class="validation-feedback text-danger-feedback d-none" id="phoneFeedback">
+                            Please enter a valid numeric phone number (10 to 15 digits).
+                        </div>
+                    </div>
+
+                    <!-- Skills & Interests -->
+                    <div class="mb-4">
+                        <label class="form-label-custom d-block mb-2">Skills & Interests (Select all that apply)</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Teaching" id="skillTeaching">
+                                    <label class="form-check-label small" for="skillTeaching">Teaching</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Event Management" id="skillEvent">
+                                    <label class="form-check-label small" for="skillEvent">Event Management</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Web Development" id="skillWeb">
+                                    <label class="form-check-label small" for="skillWeb">Web Development</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Content Writing" id="skillWriting">
+                                    <label class="form-check-label small" for="skillWriting">Content Writing</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Fundraising" id="skillFundraising">
+                                    <label class="form-check-label small" for="skillFundraising">Fundraising</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="Disaster Relief" id="skillRelief">
+                                    <label class="form-check-label small" for="skillRelief">Disaster Relief</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validation-feedback text-danger-feedback d-none mt-2" id="skillsFeedback">
+                            Please select at least one skill or interest.
+                        </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="mb-4">
+                        <label for="availability" class="form-label-custom">Availability</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 border-glass text-muted"><i class="bi bi-calendar-week"></i></span>
+                            <select class="form-select form-control form-control-custom form-select-custom border-start-0" id="availability" name="availability" required>
+                                <option value="" disabled selected>Select your availability...</option>
+                                <option value="Weekdays">Weekdays</option>
+                                <option value="Weekends">Weekends</option>
+                                <option value="Flexible">Flexible</option>
+                            </select>
+                        </div>
+                        <div class="validation-feedback text-danger-feedback d-none" id="availabilityFeedback">
+                            Please select your general availability.
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-premium w-100 mt-2 d-flex align-items-center justify-content-center" id="submitBtn">
+                        <span id="btnText">Submit Application</span>
+                        <div class="spinner-border spinner-border-sm spinner-border-custom ms-2 d-none" id="btnSpinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Kindred NGO{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Dashboard Header & Top Stats -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+            <h2 class="fw-bold mb-1"><i class="bi bi-speedometer2 text-accent-custom me-2"></i>Admin Dashboard</h2>
+            <p class="text-muted mb-0">Manage and coordinate Kindred NGO volunteers.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+            <div class="d-inline-flex gap-2">
+                <a href="{{ url_for('export_csv', search=request.args.get('search', ''), skill=request.args.get('skill', ''), availability=request.args.get('availability', '')) }}" class="btn btn-outline-light rounded-pill px-3">
+                    <i class="bi bi-filetype-csv me-1 text-success"></i>Export CSV
+                </a>
+                <a href="{{ url_for('export_pdf', search=request.args.get('search', ''), skill=request.args.get('skill', ''), availability=request.args.get('availability', '')) }}" class="btn btn-outline-light rounded-pill px-3" target="_blank">
+                    <i class="bi bi-file-pdf me-1 text-danger"></i>Export PDF
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Cards -->
+    <div class="row g-4 mb-4">
+        <!-- Total Volunteers -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="stat-card">
+                <div>
+                    <span class="text-muted small d-block">Total Volunteers</span>
+                    <h2 class="fw-bold mt-1 mb-0">{{ total_count }}</h2>
+                </div>
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Weekly Volunteers -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="stat-card">
+                <div>
+                    <span class="text-muted small d-block">Weekdays Coverage</span>
+                    <h2 class="fw-bold mt-1 mb-0">{{ weekdays_count }}</h2>
+                </div>
+                <div class="stat-icon text-info bg-info bg-opacity-10">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Weekend Volunteers -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="stat-card">
+                <div>
+                    <span class="text-muted small d-block">Weekends Coverage</span>
+                    <h2 class="fw-bold mt-1 mb-0">{{ weekends_count }}</h2>
+                </div>
+                <div class="stat-icon text-warning bg-warning bg-opacity-10">
+                    <i class="bi bi-calendar-range"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Flexible Volunteers -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="stat-card">
+                <div>
+                    <span class="text-muted small d-block">Flexible Schedule</span>
+                    <h2 class="fw-bold mt-1 mb-0">{{ flexible_count }}</h2>
+                </div>
+                <div class="stat-icon text-primary bg-primary bg-opacity-10">
+                    <i class="bi bi-shuffle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Control Panel -->
+    <div class="card-glassmorphism p-4 mb-4">
+        <form method="GET" action="{{ url_for('dashboard') }}" class="row g-3 align-items-end">
+            <!-- Search field -->
+            <div class="col-md-4">
+                <label for="search" class="form-label-custom">Search Volunteers</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0 border-glass text-muted"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control form-control-custom border-start-0" id="search" name="search" placeholder="Search by name, email, phone..." value="{{ request.args.get('search', '') }}">
+                </div>
+            </div>
+            
+            <!-- Skill Filter -->
+            <div class="col-md-3">
+                <label for="skill" class="form-label-custom">Filter by Skill</label>
+                <select class="form-select form-control form-control-custom form-select-custom" id="skill" name="skill">
+                    <option value="">All Skills</option>
+                    <option value="Teaching" {% if request.args.get('skill') == 'Teaching' %}selected{% endif %}>Teaching</option>
+                    <option value="Event Management" {% if request.args.get('skill') == 'Event Management' %}selected{% endif %}>Event Management</option>
+                    <option value="Web Development" {% if request.args.get('skill') == 'Web Development' %}selected{% endif %}>Web Development</option>
+                    <option value="Content Writing" {% if request.args.get('skill') == 'Content Writing' %}selected{% endif %}>Content Writing</option>
+                    <option value="Fundraising" {% if request.args.get('skill') == 'Fundraising' %}selected{% endif %}>Fundraising</option>
+                    <option value="Disaster Relief" {% if request.args.get('skill') == 'Disaster Relief' %}selected{% endif %}>Disaster Relief</option>
+                </select>
+            </div>
+
+            <!-- Availability Filter -->
+            <div class="col-md-3">
+                <label for="availability" class="form-label-custom">Filter by Availability</label>
+                <select class="form-select form-control form-control-custom form-select-custom" id="availability" name="availability">
+                    <option value="">Any Availability</option>
+                    <option value="Weekdays" {% if request.args.get('availability') == 'Weekdays' %}selected{% endif %}>Weekdays</option>
+                    <option value="Weekends" {% if request.args.get('availability') == 'Weekends' %}selected{% endif %}>Weekends</option>
+                    <option value="Flexible" {% if request.args.get('availability') == 'Flexible' %}selected{% endif %}>Flexible</option>
+                </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-premium w-100 py-2">
+                    <i class="bi bi-filter me-1"></i>Filter
+                </button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary-custom w-100 py-2 text-center text-nowrap">
+                    Clear
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Volunteers Table Card -->
+    <div class="card-glassmorphism p-0 overflow-hidden">
+        <div class="table-responsive-custom">
+            {% if volunteers %}
+                <table class="table table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Skills & Interests</th>
+                            <th>Availability</th>
+                            <th>Registration Date</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for volunteer in volunteers %}
+                            <tr>
+                                <td class="fw-bold">{{ volunteer.name }}</td>
+                                <td>
+                                    <a href="mailto:{{ volunteer.email }}" class="text-decoration-none text-light hover-accent">
+                                        <i class="bi bi-envelope-open me-1 text-muted small"></i>{{ volunteer.email }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="tel:{{ volunteer.phone }}" class="text-decoration-none text-light hover-accent">
+                                        <i class="bi bi-telephone me-1 text-muted small"></i>{{ volunteer.phone }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% for skill in volunteer.skills.split(', ') %}
+                                        <span class="badge-skill">{{ skill }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <span class="badge-availability">{{ volunteer.availability }}</span>
+                                </td>
+                                <td class="text-muted small">
+                                    {{ volunteer.registration_date.strftime('%b %d, %Y %H:%M') }}
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <!-- Edit Action Button (populates modal) -->
+                                        <button class="btn btn-sm btn-outline-accent rounded-pill px-2.5 py-1" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#editModal" 
+                                                data-id="{{ volunteer.id }}"
+                                                data-name="{{ volunteer.name }}"
+                                                data-email="{{ volunteer.email }}"
+                                                data-phone="{{ volunteer.phone }}"
+                                                data-skills="{{ volunteer.skills }}"
+                                                data-availability="{{ volunteer.availability }}"
+                                                title="Edit Volunteer Details">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <!-- Delete Action Button (triggers delete modal) -->
+                                        <button class="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#deleteModal" 
+                                                data-id="{{ volunteer.id }}"
+                                                data-name="{{ volunteer.name }}"
+                                                title="Remove Record">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="p-5 text-center text-muted">
+                    <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                    <h5>No volunteers found matching your query</h5>
+                    <p class="small mb-0">Try adjusting your search criteria or filters.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Edit Volunteer Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card-glassmorphism border-0" style="background: rgba(15, 23, 42, 0.98); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+            <div class="modal-header border-bottom border-glass">
+                <h5 class="modal-title fw-bold" id="editModalLabel"><i class="bi bi-pencil-square text-accent-custom me-2"></i>Edit Volunteer Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editForm" method="POST" action="">
+                <div class="modal-body p-4">
+                    <input type="hidden" id="edit-id" name="id">
+                    
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="edit-name" class="form-label-custom">Full Name</label>
+                        <input type="text" class="form-control form-control-custom" id="edit-name" name="name" required>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="edit-email" class="form-label-custom">Email Address</label>
+                        <input type="email" class="form-control form-control-custom" id="edit-email" name="email" required>
+                    </div>
+                    
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label for="edit-phone" class="form-label-custom">Phone Number</label>
+                        <input type="tel" class="form-control form-control-custom" id="edit-phone" name="phone" required>
+                    </div>
+                    
+                    <!-- Skills Checkboxes -->
+                    <div class="mb-3">
+                        <label class="form-label-custom d-block">Skills & Interests</label>
+                        <div class="row g-2">
+                            {% for skill_name in ['Teaching', 'Event Management', 'Web Development', 'Content Writing', 'Fundraising', 'Disaster Relief'] %}
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input form-check-input-custom" type="checkbox" name="skills" value="{{ skill_name }}" id="edit-skill-{{ loop.index }}">
+                                        <label class="form-check-label small" for="edit-skill-{{ loop.index }}">{{ skill_name }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Availability Dropdown -->
+                    <div class="mb-3">
+                        <label for="edit-availability" class="form-label-custom">Availability</label>
+                        <select class="form-select form-control form-control-custom form-select-custom" id="edit-availability" name="availability" required>
+                            <option value="Weekdays">Weekdays</option>
+                            <option value="Weekends">Weekends</option>
+                            <option value="Flexible">Flexible</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-glass p-3">
+                    <button type="button" class="btn btn-secondary-custom btn-sm px-3" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-premium btn-sm px-4">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content card-glassmorphism border-0" style="background: rgba(15, 23, 42, 0.98); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+            <div class="modal-header border-bottom border-glass">
+                <h5 class="modal-title fw-bold text-danger-custom" id="deleteModalLabel"><i class="bi bi-exclamation-triangle me-2"></i>Delete Record</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteForm" method="POST" action="">
+                <div class="modal-body p-4 text-center">
+                    <p class="mb-0">Are you sure you want to delete <strong id="delete-name" class="text-white"></strong> from the database?</p>
+                    <p class="small text-muted mt-2 mb-0">This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer border-top border-glass p-3 justify-content-center">
+                    <button type="button" class="btn btn-secondary-custom btn-sm px-3" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger btn-sm px-4 btn-premium" style="background: linear-gradient(135deg, var(--danger-custom) 0%, var(--danger-custom-hover) 100%); box-shadow: 0 4px 12px rgba(244, 63, 94, 0.25);">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Populate Edit Modal
+    const editModal = document.getElementById('editModal');
+    if (editModal) {
+        editModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            const email = button.getAttribute('data-email');
+            const phone = button.getAttribute('data-phone');
+            const availability = button.getAttribute('data-availability');
+            
+            // Skills might be comma separated string "Teaching, Fundraising"
+            const skillsStr = button.getAttribute('data-skills') || '';
+            const skillsArray = skillsStr.split(',').map(s => s.trim());
+            
+            // Update the form action target
+            const form = document.getElementById('editForm');
+            form.action = `/admin/volunteer/${id}/edit`;
+            
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-name').value = name;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-phone').value = phone;
+            document.getElementById('edit-availability').value = availability;
+            
+            // Toggle corresponding checkboxes
+            const checkboxes = form.querySelectorAll('input[name="skills"]');
+            checkboxes.forEach(cb => {
+                cb.checked = skillsArray.includes(cb.value);
+            });
+        });
+    }
+
+    // Populate Delete Modal
+    const deleteModal = document.getElementById('deleteModal');
+    if (deleteModal) {
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            
+            const form = document.getElementById('deleteForm');
+            form.action = `/admin/volunteer/${id}/delete`;
+            
+            document.getElementById('delete-name').textContent = name;
+        });
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,444 @@
+/* Global CSS Variables for NGO Branded Premium Theme */
+:root {
+    --primary-dark: #070b13;
+    --secondary-dark: #0f172a;
+    --accent-emerald: #10b981;
+    --accent-emerald-hover: #059669;
+    --accent-glow: rgba(16, 185, 129, 0.15);
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    --card-glass: rgba(15, 23, 42, 0.65);
+    --border-glass: rgba(255, 255, 255, 0.06);
+    --danger-custom: #f43f5e;
+    --danger-custom-hover: #e11d48;
+    --warning-custom: #f59e0b;
+    --transition-speed: 0.3s;
+}
+
+/* Base Body Styles */
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at 50% 0%, #111e35 0%, var(--primary-dark) 80%);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Blob Decorative Elements */
+body::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navigation Custom Styling */
+.navbar {
+    background-color: rgba(7, 11, 19, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-glass);
+    padding: 1rem 0;
+    z-index: 1050;
+}
+
+.brand-text {
+    letter-spacing: -0.5px;
+    font-size: 1.4rem;
+}
+
+.text-accent-custom {
+    color: var(--accent-emerald);
+}
+
+.text-danger-custom {
+    color: var(--danger-custom);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-muted) !important;
+    transition: color var(--transition-speed) ease;
+    padding: 0.5rem 1rem !important;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-light) !important;
+}
+
+.btn-custom-nav {
+    border-width: 1.5px;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-outline-accent {
+    color: var(--accent-emerald);
+    border-color: var(--accent-emerald);
+}
+
+.btn-outline-accent:hover {
+    background-color: var(--accent-emerald);
+    border-color: var(--accent-emerald);
+    color: var(--primary-dark);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Premium Card Glassmorphism */
+.card-glassmorphism {
+    background: var(--card-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.card-glassmorphism:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.05);
+}
+
+/* Forms Styling */
+.form-label-custom {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.form-control-custom {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border: 1.5px solid var(--border-glass) !important;
+    color: var(--text-light) !important;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    transition: all var(--transition-speed) ease !important;
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--accent-emerald) !important;
+    box-shadow: 0 0 10px var(--accent-glow) !important;
+    background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+.form-control-custom::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+/* Dropdown and Selection inputs custom styling */
+.form-select-custom {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* Custom Checkboxes and Form Labels */
+.form-check-label {
+    color: var(--text-light) !important;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color var(--transition-speed) ease;
+}
+
+.form-check-label:hover {
+    color: var(--accent-emerald) !important;
+}
+
+.form-check-input-custom {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border: 1.5px solid var(--border-glass) !important;
+    border-radius: 0.35rem !important;
+    cursor: pointer;
+    width: 1.15em;
+    height: 1.15em;
+    transition: all var(--transition-speed) ease;
+}
+
+.form-check-input-custom:checked {
+    background-color: var(--accent-emerald) !important;
+    border-color: var(--accent-emerald) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23070b13' stroke-linecap='round' stroke-linejoin='round' stroke-width='3.5' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") !important;
+    box-shadow: 0 0 8px var(--accent-glow) !important;
+}
+
+/* Premium Buttons */
+.btn-premium {
+    background: linear-gradient(135deg, var(--accent-emerald) 0%, var(--accent-emerald-hover) 100%);
+    color: var(--primary-dark);
+    font-weight: 700;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.btn-premium:hover, .btn-premium:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    color: var(--primary-dark);
+}
+
+.btn-premium:active {
+    transform: translateY(0);
+}
+
+/* Secondary Button Custom styles */
+.btn-secondary-custom {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid var(--border-glass);
+    color: var(--text-light);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-secondary-custom:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite ease-in-out;
+    display: inline-block;
+}
+
+/* Landing/Hero Section Branding */
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    background: linear-gradient(135deg, var(--text-light) 30%, var(--accent-emerald) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+/* Info Cards on Sign up Page */
+.info-icon-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-emerald);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Success Checkmark Animation */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--accent-emerald);
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke: var(--accent-emerald);
+    stroke-width: 3;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Table Style for Dashboard */
+.table-responsive-custom {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+}
+
+.table-custom {
+    margin-bottom: 0;
+    background-color: transparent !important;
+}
+
+.table-custom th {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    color: var(--text-muted) !important;
+    border-bottom: 2px solid var(--border-glass) !important;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.table-custom td {
+    background-color: rgba(15, 23, 42, 0.45) !important;
+    color: var(--text-light) !important;
+    border-bottom: 1px solid var(--border-glass) !important;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table-custom tr:hover td {
+    background-color: rgba(15, 23, 42, 0.75) !important;
+}
+
+/* Badge Custom Styles */
+.badge-skill {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    color: var(--accent-emerald) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+    border-radius: 20px;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+}
+
+.badge-availability {
+    background-color: rgba(99, 102, 241, 0.15) !important;
+    color: #818cf8 !important;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+    border-radius: 20px;
+}
+
+/* Admin Dashboard Analytics Card */
+.stat-card {
+    background: var(--card-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--accent-emerald);
+    background-color: rgba(16, 185, 129, 0.1);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: var(--primary-dark);
+    border-top: 1px solid var(--border-glass);
+}
+
+.footer-developer {
+    color: var(--accent-emerald) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+    font-weight: 500;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.hover-accent:hover {
+    color: var(--accent-emerald) !important;
+}
+
+/* Spinner Custom */
+.spinner-border-custom {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-width: 2px;
+}
+
+/* Real-time Field Validation State Classes */
+.is-valid-custom {
+    border-color: var(--accent-emerald) !important;
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.2) !important;
+}
+
+.is-invalid-custom {
+    border-color: var(--danger-custom) !important;
+    box-shadow: 0 0 5px rgba(244, 63, 94, 0.2) !important;
+}
+
+.validation-feedback {
+    font-size: 0.825rem;
+    margin-top: 0.25rem;
+}
+
+.text-danger-feedback {
+    color: var(--danger-custom);
+}
+
+.text-success-feedback {
+    color: var(--accent-emerald);
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.25rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .card-glassmorphism {
+        padding: 1.5rem !important;
+    }
+    
+    .table-custom th, .table-custom td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+}
